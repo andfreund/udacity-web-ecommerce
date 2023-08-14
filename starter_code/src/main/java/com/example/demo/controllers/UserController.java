@@ -51,8 +51,10 @@ public class UserController {
 		Cart cart = new Cart();
 
 		if (createUserRequest.getPassword().length() < 7 || !createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())) {
+			log.warn(String.format("Creation of user '%s' failed, passwords don't match or too short", user.getUsername()));
 			return ResponseEntity.badRequest().build();
 		}
+
 		cartRepository.save(cart);
 		user.setCart(cart);
 		user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword()));
