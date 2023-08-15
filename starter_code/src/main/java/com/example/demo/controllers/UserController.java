@@ -51,7 +51,7 @@ public class UserController {
 		Cart cart = new Cart();
 
 		if (createUserRequest.getPassword().length() < 7 || !createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())) {
-			log.warn(String.format("Creation of user '%s' failed, passwords don't match or too short", user.getUsername()));
+			log.error(String.format("Creation of user '%s' failed, passwords don't match or too short", user.getUsername()));
 			return ResponseEntity.badRequest().build();
 		}
 
@@ -61,7 +61,6 @@ public class UserController {
 		userRepository.save(user);
 
 		log.info(String.format("User '%s' successfully created", user.getUsername()));
-
 		return ResponseEntity.ok(user);
 	}
 

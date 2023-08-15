@@ -39,13 +39,13 @@ public class CartController {
 	public ResponseEntity<Cart> addTocart(@RequestBody ModifyCartRequest request) {
 		User user = userRepository.findByUsername(request.getUsername());
 		if (user == null) {
-			log.warn(String.format("User '%s' not found", request.getUsername()));
+			log.error(String.format("User '%s' not found", request.getUsername()));
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 
 		Optional<Item> item = itemRepository.findById(request.getItemId());
 		if (!item.isPresent()) {
-			log.warn(String.format("Item with ID '%d' not found", request.getItemId()));
+			log.error(String.format("Item with ID '%d' not found", request.getItemId()));
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 
@@ -61,13 +61,13 @@ public class CartController {
 	public ResponseEntity<Cart> removeFromcart(@RequestBody ModifyCartRequest request) {
 		User user = userRepository.findByUsername(request.getUsername());
 		if (user == null) {
-			log.warn(String.format("User '%s' not found", request.getUsername()));
+			log.error(String.format("User '%s' not found", request.getUsername()));
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 
 		Optional<Item> item = itemRepository.findById(request.getItemId());
 		if (!item.isPresent()) {
-			log.warn(String.format("Item with ID '%d' not found", request.getItemId()));
+			log.error(String.format("Item with ID '%d' not found", request.getItemId()));
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 
